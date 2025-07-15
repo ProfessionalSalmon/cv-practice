@@ -1,46 +1,69 @@
 import cv2
 from util import get_limits
-from PIL import Image
 
+# Define colors in BGR
+colors = {
+    'r': ([0, 0, 255], 'Red'),
+    'g': ([0, 255, 0], 'Green'),
+    'b': ([255, 0, 0], 'Blue'),
+    'y': ([0, 255, 255], 'Yellow'),
+    'c': ([255, 255, 0], 'Cyan'),
+    'm': ([255, 0, 255], 'Magenta'),
+    'o': ([0, 165, 255], 'Orange'),
+    'p': ([203, 192, 255], 'Pink'),
+    'k': ([128, 0, 128], 'Purple'),
+    'w': ([255, 255, 255], 'White'),
+    'd': ([50, 50, 50], 'Dark Gray'),
+    'l': ([0, 255, 128], 'Lime'),
+    'n': ([128, 0, 0], 'Navy'),
+    'e': ([19, 69, 139], 'Brown')
+}
 
-yellow = [0, 255, 255]  # yellow in BGR colorspace
-red = [0, 0, 255]
-green = [0, 255, 0]
-purple = [128, 0, 128]
-pink = [203, 192, 255]
+# Set initial color (default to pink)
+color_key = 'y'
+target_color, color_name = colors[color_key]
 
-cap = cv2.VideoCapture(0)  # Open camera
+# Open the default camera
+cap = cv2.VideoCapture(0)
+
 while True:
     ret, frame = cap.read()
     if not ret:
         break
-    
-    # convert original image from BGR to HSV
+
+    # Convert original image from BGR to HSV
     hsvImage = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    lowerLimit, upperLimit = get_limits(color=pink)
+    # Get HSV limits for the currently selected color
+    lowerLimit, upperLimit = get_limits(color=target_color)
 
-    # the location of all the pixels containing the information we wamt
+    # Create a binary mask for the selected color
     mask = cv2.inRange(hsvImage, lowerLimit, upperLimit)
 
-    # convert image from being numpy array (opencv representation) to pillow
-    mask_ = Image.fromarray(mask)
+    # Find contours of detected regions
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # bounding box
-    bbox = mask_.getbbox()
-    # print(bbox)
-    if bbox is not None:
-        x1, y1, x2, y2 = bbox
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 5)  # color: green, thickness = 5
+    for cnt in contours:
+        x, y, w, h = cv2.boundingRect(cnt)
 
+        if w * h > 500:
+            # Draw bounding box
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 5)
+
+    # Display current target color on frame
+    cv2.putText(frame, f"Tracking: {color_name}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+
+    # Show the result
     cv2.imshow('Camera', frame)
 
-    # Wait for key press for 1 ms
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # Handle key press
+    key = cv2.waitKey(1) & 0xFF
+
+    if key == ord('q'):
         break
+    elif chr(key) in colors:
+        target_color, color_name = colors[chr(key)]
 
-# Turn camera off by releasing the capture object
+# Release camera and close all windows
 cap.release()
-
-# Close all OpenCV windows
 cv2.destroyAllWindows()
