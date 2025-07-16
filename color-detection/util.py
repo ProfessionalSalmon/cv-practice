@@ -6,7 +6,7 @@ hsv_ranges = {
     'red2': (np.array([165, 70, 50]), np.array([180, 255, 255])),
     'green': (np.array([36,  50,  70]), np.array([89, 255, 255])),
     'blue':  (np.array([90,  60,  0]),  np.array([128, 255, 255])),
-    'yellow':(np.array([25, 150,  150]),   np.array([35, 255, 255])),
+    'yellow':(np.array([28, 200, 200]),  np.array([35, 255, 255])),
     'orange':(np.array([10, 100, 20]),  np.array([25, 255, 255])),
     'pink':  (np.array([145, 50, 70]),  np.array([170, 255, 255])),
     'purple': (np.array([130, 50, 50]), np.array([160, 255, 255])),

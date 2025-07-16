@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folders
+venv/
+.env/
+.env.*  # any dotenv files you don't want committed
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings folder
+.vscode/
+
+# PyCharm project files
+.idea/
+
+# Poetry cache and lock files (optional)
+# poetry.lock
+# .pdm.toml
+
+# mypy type checker
+.mypy_cache/
+
+# Profiling data
+.p
+
+# data
+face-anonymizer/vid/
+face-anonymizer/img/

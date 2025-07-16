@@ -1,1 +1,3 @@
 & "C:\Users\Terra\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\Local\pypoetry\Cache\virtualenvs\cv-practice-af84V3Zq-py3.12\Scripts\Activate.ps1"
+
+venv\Scripts\activate
