@@ -16,3 +16,13 @@ This repository is a personal learning project focused on building foundational 
     - Live webcam feed
 - Uses `MediaPipe` for face detection.
 - Supports blurring method for anonymization.
+
+### 3. Emotion Detection from Facial Landmarks
+- Detects facial landmarks using MediaPipe FaceMesh (468 keypoints per face).
+- Extracts and preprocesses 3D facial landmark coordinates (x, y, z) for emotion classification.
+- Trained a Random Forest Classifier on a custom dataset labeled with 5 basic emotions:
+    `Anger`, `Happy`, `Neutral`, `Sad`, `Surprise`
+- Real-time webcam demo that:
+    - Detects face
+    - Predicts emotion
+    - Displays label and bounding box
