@@ -14,12 +14,22 @@ This repository is a personal learning project focused on building foundational 
     - Predicts emotion
     - Displays label and bounding box
 
-### 2. Color Detection from Webcam
+### 2. Hand Sign Detection (mini-heart detection)
+- Detects hand gestures in real-time using webcam.
+- Uses `MediaPipe Hands` to extract 21 key landmarks per hand.
+- Trained a custom classifier on a dataset I collected using my own hands.
+- Supports recognition of 3 hand signs:
+    - `Mini-Heart`
+    - `Peace`
+    - `I Love You`
+- Displays bounding box and label for each detected hand gesture.
+
+### 3. Color Detection from Webcam
 - Detects a specific color range in real-time using webcam input.
 - Utilizes `HSV` color space for better color segmentation.
 - Support dynamic color range adjustment using trackbars.
 
-### 3. Face Anonymizer
+### 4. Face Anonymizer
 - Detects and anonymizes human faces in various media sources:
     - Static images
     - Video files
